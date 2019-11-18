@@ -3,10 +3,11 @@ import java.awt.*;
 
 abstract class TreeNode{
 
-	private int value = 0;
-	private Color color = null;
+	protected int value = 0;
+	protected Color color = Color.BLACK;
 
-	private TreeNode left, right;
+	protected TreeNode 	left = null, 
+						right = null;
 
 	public int getValue()
 	{
@@ -28,15 +29,20 @@ abstract class TreeNode{
 		return color;
 	}
 
+	public void setColor(Color c)
+	{
+		color = c;
+	}
+
 	protected abstract void setLeftNode(TreeNode newLeft);
 	
-	protected abstract void setRightNode(TreeNode newLeft);
+	protected abstract void setRightNode(TreeNode newRight);
 
 }
 
 abstract class TreeType
 {
-	private TreeNode rootNode = null;
+	protected TreeNode rootNode = null;
 
 	public abstract TreeNode getRoot();
 
