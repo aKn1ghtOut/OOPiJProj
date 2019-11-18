@@ -4,7 +4,7 @@ import java.awt.*;
 abstract class TreeNode{
 
 	protected int value = 0;
-	protected Color color = Color.BLACK;
+	protected Color color = Color.blue;
 
 	protected TreeNode 	left = null, 
 						right = null;

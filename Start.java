@@ -1,12 +1,7 @@
-import java.util.*;
 import javax.swing.*;
-import javax.swing.border.Border;
-
-import javafx.scene.canvas.Canvas;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.ImageObserver;
 import java.awt.image.*;
 
 class Start extends JFrame implements Runnable {
@@ -67,7 +62,8 @@ class Start extends JFrame implements Runnable {
 
 	public void update(Graphics g)
 	{
-		bufferGraphics.clearRect(0, 0, 1000, 1000);
+		bufferGraphics.setColor(Color.BLACK);
+		bufferGraphics.fillRect(0, 0, 1000, 1000);
 		
 		processTree();
 
@@ -84,27 +80,35 @@ class Start extends JFrame implements Runnable {
 		if(l == null)
 		return;
 
-		processNode(l, drawPane.getWidth() / 2, 50);
+		processNode(l, drawPane.getWidth() / 2, 50, drawPane.getWidth() / 4);
 
 	}
 
-	public void processNode(TreeNode tn, int x, int y)
+	public void processNode(TreeNode tn, int x, int y, int d_x)
 	{
 		TreeNode 	left = tn.leftNode(),
 					right = tn.rightNode();
 
 		Color col = tn.getColor();
-		col = col == null ? Color.black : col;
+		col = col == null ? Color.blue : col;
 
 		bufferGraphics.setColor(col);
-
 		bufferGraphics.fillOval(x - 25, y - 25, 50, 50);
 
+		bufferGraphics.setColor(Color.white);
+		bufferGraphics.drawString(tn.value + "", x - 5, y - 5);
+
 		if(left != null)
-		processNode(left, x / 2, y + vert_dist);
+		{
+			bufferGraphics.drawLine(x, y, x - d_x, y + vert_dist);
+			processNode(left, x - d_x, y + vert_dist, (d_x / 2));
+		}
 
 		if(right != null)
-		processNode(right, (x + bufferImage.getWidth())/2, y + vert_dist);
+		{
+			bufferGraphics.drawLine(x, y, x + d_x, y + vert_dist);
+			processNode(right, x + d_x, y + vert_dist, (d_x / 2));
+		}
 	}
 
 	Start()
