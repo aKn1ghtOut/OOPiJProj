@@ -1,14 +1,15 @@
-// The following recursive function will look for a particular node in the binary search tree 
-public Node search(Node root, int key) 
-{ 
-    // Base Cases: root is null or key is present at root 
-    if (root==null || root.key==key) 
-        return root; 
-  
-    // val is greater than root's key 
-    if (root.key > key) 
-        return search(root.left, key); 
-  
-    // val is less than root's key 
-    return search(root.right, key); 
-} 
+// The following recursive function will look for a particular node in the binary search tree
+public Node search(Node root, int key)
+{
+    // If the is null or if the item being searched for is found at the root
+    if (root==null || root.key==key)
+        return root;
+
+    // The value of the item is lesser than the current root
+    if (root.key > key)
+        return search(root.left, key);
+
+    // The value of the item is greater than the current root
+    else // check if removing this works
+      return search(root.right, key);
+}
