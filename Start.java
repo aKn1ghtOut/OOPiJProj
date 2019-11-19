@@ -23,8 +23,7 @@ class Start extends JFrame implements Runnable {
 					rightControlPanel,
 					buttonsPanel;
 
-	int 			vert_dist = 50,
-					hori_dist = 50;
+	int 			vert_dist = 100;
 
 	TreeType		tr 	=	null;
 
@@ -62,7 +61,7 @@ class Start extends JFrame implements Runnable {
 
 	public void update(Graphics g)
 	{
-		bufferGraphics.setColor(Color.BLACK);
+		bufferGraphics.setColor(Color.GRAY);
 		bufferGraphics.fillRect(0, 0, 1000, 1000);
 		
 		processTree();
