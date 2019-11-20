@@ -105,8 +105,42 @@ public class BinarySearchTree extends TreeType
 	}
 
 	@Override
-	public void deleteElement(int value) {
+	public BinaryNode deleteElement(BinaryNode root, int val) {
+			// If the term is the node to be deleted
+			if (root == null)
+				return root;
 
+			// If the the value is less than the root then move to the left side
+			if(val < (int) root.value){
+				root.left = deleteElement(root.left, val);
+			}
+			// If the the value is greater than the root then move to the right side
+			else if (val > (int) root.data){
+      	root.right = deleteElement(root.right, value);
+      }
+
+			// if we have arrived at the leaf
+			else{
+            if (root.left == null)
+                return root.right;
+      			else if (root.right == null)
+                return root.left;
+
+						// Moving the data from the inorder Successor to the current position
+						root.data = inOrderSuccessor(root.right);
+            root.right = deleteRecursively(root.right, (int) root.data);
+			}
+
+			//
+			return root;
+}
+
+public static int inOrderSuccessor(BinaryNode root){
+	int min = (int)root.value;
+	while(root.left != null){
+		min = (int)root.left.value;
+		root = root.left;
 	}
 
+	return min;
 }
