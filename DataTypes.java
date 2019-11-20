@@ -50,11 +50,17 @@ abstract class TreeType
 
 	public abstract TreeNode getRoot();
 
-	public abstract void sortTree();
+	public abstract void 	sortTree();
 
-	public abstract void search(int value); //If this element was being searched for, set color to java.awt.Color.YELLOW else if active element(being moved around or something), set to java.awt.Color.BLACK, else set to NULL;
+	public abstract void 	search(int value); //If this element was being searched for, set color to java.awt.Color.YELLOW else if active element(being moved around or something), set to java.awt.Color.BLACK, else set to NULL;
 
-	public abstract void insertElement(int value);
+	public abstract void 	insertElement(int value);
 	
-	public abstract void deleteElement(int value);
+	public abstract void 	deleteElement(int value);
+
+	public abstract String	inOrder();
+	
+	public abstract String	preOrder();
+	
+	public abstract String	posOrder();
 }

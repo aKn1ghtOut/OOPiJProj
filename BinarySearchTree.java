@@ -60,10 +60,10 @@ public class BinarySearchTree extends TreeType
 		((BinaryNode)rootNode).searchNodes(value, Color.RED);
 	}
 
-  // Insertion function
-  void binaryInsert(int key) {
-     insertElement(key);
-  }
+	// Insertion function
+	void binaryInsert(int key) {
+		insertElement(key);
+	}
 
 	public void insertElement(int value) {
 
@@ -104,8 +104,7 @@ public class BinarySearchTree extends TreeType
 		}
 	}
 
-	@Override
-	public BinaryNode deleteElement(BinaryNode root, int val) {
+	public TreeNode deleteElement(TreeNode root, int val) {
 			// If the term is the node to be deleted
 			if (root == null)
 				return root;
@@ -115,9 +114,9 @@ public class BinarySearchTree extends TreeType
 				root.left = deleteElement(root.left, val);
 			}
 			// If the the value is greater than the root then move to the right side
-			else if (val > (int) root.data){
-      	root.right = deleteElement(root.right, value);
-      }
+			else if (val > (int) root.value){
+				root.right = deleteElement(root.right, val);
+			}
 
 			// if we have arrived at the leaf
 			else{
@@ -127,20 +126,27 @@ public class BinarySearchTree extends TreeType
                 return root.left;
 
 						// Moving the data from the inorder Successor to the current position
-						root.data = inOrderSuccessor(root.right);
-            root.right = deleteRecursively(root.right, (int) root.data);
+						root.value = inOrderSuccessor(root.right);
+            root.right = deleteElement(root.right, (int) root.value);
 			}
 
 			//
 			return root;
-}
-
-public static int inOrderSuccessor(BinaryNode root){
-	int min = (int)root.value;
-	while(root.left != null){
-		min = (int)root.left.value;
-		root = root.left;
 	}
 
-	return min;
+	public static int inOrderSuccessor(TreeNode root){
+		int min = (int)root.value;
+		while(root.left != null){
+			min = (int)root.left.value;
+			root = root.left;
+		}
+
+		return min;
+	}
+
+	@Override
+	public void deleteElement(int value) {
+		deleteElement(rootNode, value);
+	}
+
 }

@@ -58,6 +58,7 @@ class Start extends JFrame implements Runnable {
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return;
 		}
 	}
@@ -156,6 +157,24 @@ class Start extends JFrame implements Runnable {
 			public void actionPerformed(ActionEvent e) {
 				int val = Integer.parseInt(nodeField.getText());
 				tr.insertElement(val);
+			}
+		});
+
+		deleteButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int val = Integer.parseInt(nodeField.getText());
+				tr.deleteElement(val);
+			}
+		});
+
+		searchButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int val = Integer.parseInt(nodeField.getText());
+				tr.search(val);
 			}
 		});
 
