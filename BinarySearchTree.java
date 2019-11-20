@@ -130,7 +130,7 @@ public class BinarySearchTree extends TreeType
             root.right = deleteElement(root.right, (int) root.value);
 			}
 
-			//
+			// Returning the current root
 			return root;
 	}
 
@@ -144,9 +144,74 @@ public class BinarySearchTree extends TreeType
 		return min;
 	}
 
+	// Inorder Traversal of the tree
+	public void inOrder(TreeNode root) {
+		// Empty Tree
+		if(root == null)
+			return;
+
+		// check the left child
+		inOrder(root.left);
+
+		// print the current root value
+		System.out.println(node.value + " ");
+
+		// Check the right child
+		inOrder(root.right);
+	}
+
+	// Preorder Traversal of the tree
+	public void inOrder(TreeNode root) {
+		// Empty Tree
+		if(root == null)
+			return;
+
+		// print the current root value
+		System.out.println(node.value + " ");
+
+		// check the left child
+		inOrder(root.left);
+
+		// Check the right child
+		inOrder(root.right);
+	}
+
+	// Postorder Traversal of the tree
+	public void inOrder(TreeNode root) {
+		// Empty Tree
+		if(root == null)
+			return;
+			
+		// check the left child
+		inOrder(root.left);
+
+		// Check the right child
+		inOrder(root.right);
+
+		// print the current root value
+		System.out.println(node.value + " ");
+	}
+
+// Overriding all the abstract functions
 	@Override
 	public void deleteElement(int value) {
 		deleteElement(rootNode, value);
 	}
+
+	@Override
+	public void	inOrder() {
+		inOrder(rootNode);
+	}
+
+	@Override
+	public void	preOrder() {
+		preOrder(rootNode);
+	}
+
+	@Override
+	public void	postOrder() {
+		postOrder(rootNode);
+	}
+
 
 }

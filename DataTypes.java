@@ -5,10 +5,10 @@ abstract class TreeNode{
 	protected int value = 0;
 	protected Color color = Color.blue;
 
-	protected TreeNode 	left = null, 
+	protected TreeNode 	left = null,
 						right = null;
 
-	public int 	curr_x=-1, 
+	public int 	curr_x=-1,
 				curr_y=-1; //Only to be used by Start.java. Don't play with these
 
 	public long move_s = -1;
@@ -39,7 +39,7 @@ abstract class TreeNode{
 	}
 
 	protected abstract void setLeftNode(TreeNode newLeft);
-	
+
 	protected abstract void setRightNode(TreeNode newRight);
 
 }
@@ -55,12 +55,12 @@ abstract class TreeType
 	public abstract void 	search(int value); //If this element was being searched for, set color to java.awt.Color.YELLOW else if active element(being moved around or something), set to java.awt.Color.BLACK, else set to NULL;
 
 	public abstract void 	insertElement(int value);
-	
+
 	public abstract void 	deleteElement(int value);
 
-	public abstract String	inOrder();
-	
-	public abstract String	preOrder();
-	
-	public abstract String	posOrder();
+	public abstract void	inOrder();
+
+	public abstract void	preOrder();
+
+	public abstract void	postOrder();
 }
