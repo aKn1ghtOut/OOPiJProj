@@ -53,10 +53,13 @@ class Start extends JFrame implements Runnable {
 
 		try {
 			Thread.sleep(16);
-		} catch (InterruptedException e) {
+			this.run();
 		}
-
-		this.run();
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return;
+		}
 	}
 
 	public void update(Graphics g)
@@ -72,7 +75,7 @@ class Start extends JFrame implements Runnable {
 	public void processTree()
 	{
 		if(tr == null)
-		tr = new ExampleTree();
+		tr = new BinarySearchTree();
 
 		TreeNode l = tr.getRoot();
 
@@ -90,6 +93,9 @@ class Start extends JFrame implements Runnable {
 
 		Color col = tn.getColor();
 		col = col == null ? Color.blue : col;
+
+		bufferGraphics.setColor(Color.white);
+		bufferGraphics.fillOval(x - 27, y - 27, 54, 54);
 
 		bufferGraphics.setColor(col);
 		bufferGraphics.fillOval(x - 25, y - 25, 50, 50);

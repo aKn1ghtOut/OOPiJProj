@@ -40,7 +40,7 @@ class BinaryNode extends TreeNode
 
 }
 
-public class ExampleTree extends TreeType
+public class BinarySearchTree extends TreeType
 {
 
 	@Override
@@ -65,7 +65,7 @@ public class ExampleTree extends TreeType
      insertElement(key);
   }
 
-	public BinaryNode insertElement(int value) {
+	public void insertElement(int value) {
 
     // If the tree is empty
 		if(rootNode == null)
@@ -73,13 +73,34 @@ public class ExampleTree extends TreeType
 		else
 		{
       // Creating a new node
-      TreeNode curr = rootNode;
+      		TreeNode curr = rootNode;
 			ExampleNode en = new ExampleNode(value);
 
-			if(value < rootNode.value)
-			   curr.setLeftNode(en);
-			else
-			   curr.setRightNode(en);
+			int inserted = 0;
+
+			while(inserted != 1)
+			{
+				if(value < curr.value)
+				{
+					if(curr.leftNode() != null)
+					curr = curr.leftNode();
+					else
+					{
+						curr.setLeftNode(en);
+						inserted = 1;
+					}
+				}
+				else
+				{
+					if(curr.rightNode() != null)
+					curr = curr.rightNode();
+					else
+					{
+						curr.setRightNode(en);
+						inserted = 1;
+					}
+				}
+			}
 		}
 	}
 

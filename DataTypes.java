@@ -8,6 +8,11 @@ abstract class TreeNode{
 	protected TreeNode 	left = null, 
 						right = null;
 
+	public int 	curr_x=-1, 
+				curr_y=-1; //Only to be used by Start.java. Don't play with these
+
+	public long move_s = -1;
+
 	public int getValue()
 	{
 		return value;
