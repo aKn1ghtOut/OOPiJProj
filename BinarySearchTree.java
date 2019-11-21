@@ -145,23 +145,44 @@ public class BinarySearchTree extends TreeType
 	}
 
 	// Inorder Traversal of the tree
-	public void inOrder(TreeNode root) {
+	public String inOrder(TreeNode root) {
+		// String to be returned
+		String inString  = "";
+
 		// Empty Tree
 		if(root == null)
 			return;
+		// Creaing a stack
+		Stack<Node> s = new Stack<Node>();
+    Node curr = root;
 
-		// check the left child
-		inOrder(root.left);
+		// Travering the tree
+		while(curr != null || s.size() > 0){
 
-		// print the current root value
-		System.out.println(node.value + " ");
+			// Reaching the left most node and pusing values onto the stack
+			while(curr != null){
+				s.push(curr);
+				curr = curr.left;
+			}
 
-		// Check the right child
-		inOrder(root.right);
+			// Since curr is null right now, we assign the leftmost node to it and move upwards
+			curr = s.pop();
+
+			// Concatinating to the string
+			inString += (String)curr.value;
+
+			// After visiting the left nodes and the parents, we now visit the right nodes
+			curr = curr.right;
+		}
+
+		return inString; 
 	}
 
 	// Preorder Traversal of the tree
-	public void inOrder(TreeNode root) {
+	public String preOrder(TreeNode root) {
+		// String to be returned
+		String preString = "";
+
 		// Empty Tree
 		if(root == null)
 			return;
@@ -170,23 +191,26 @@ public class BinarySearchTree extends TreeType
 		System.out.println(node.value + " ");
 
 		// check the left child
-		inOrder(root.left);
+		preOrder(root.left);
 
 		// Check the right child
-		inOrder(root.right);
+		preOrder(root.right);
 	}
 
 	// Postorder Traversal of the tree
-	public void inOrder(TreeNode root) {
+	public String postOrder(TreeNode root) {
+		// String to be returned
+		String postString = "";
+
 		// Empty Tree
 		if(root == null)
 			return;
-			
+
 		// check the left child
-		inOrder(root.left);
+		postOrder(root.left);
 
 		// Check the right child
-		inOrder(root.right);
+		postOrder(root.right);
 
 		// print the current root value
 		System.out.println(node.value + " ");
@@ -209,7 +233,7 @@ public class BinarySearchTree extends TreeType
 	}
 
 	@Override
-	public void	postOrder() {
+	public void postOrder() {
 		postOrder(rootNode);
 	}
 
