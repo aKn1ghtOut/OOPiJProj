@@ -42,6 +42,8 @@ class BinaryNode extends TreeNode
 
 public class BinarySearchTree extends TreeType
 {
+	// Declaring static variables
+	static Stack<TreeNode> s1, s2;
 
 	@Override
 	public TreeNode getRoot() {
@@ -73,7 +75,7 @@ public class BinarySearchTree extends TreeType
 		else
 		{
       // Creating a new node
-      		TreeNode curr = rootNode;
+      TreeNode curr = rootNode;
 			ExampleNode en = new ExampleNode(value);
 
 			int inserted = 0;
@@ -127,7 +129,7 @@ public class BinarySearchTree extends TreeType
 
 						// Moving the data from the inorder Successor to the current position
 						root.value = inOrderSuccessor(root.right);
-            root.right = deleteElement(root.right, (int) root.value);
+            root.right = deleteElement(root.right, (int)root.value);
 			}
 
 			// Returning the current root
@@ -135,6 +137,9 @@ public class BinarySearchTree extends TreeType
 	}
 
 	public static int inOrderSuccessor(TreeNode root){
+		// Added the changes - check if working
+		if(root.left == null && root.right == null)
+			return null;
 		int min = (int)root.value;
 		while(root.left != null){
 			min = (int)root.left.value;
@@ -151,10 +156,11 @@ public class BinarySearchTree extends TreeType
 
 		// Empty Tree
 		if(root == null)
-			return;
+			return inString;
+
 		// Creaing a stack
-		Stack<Node> s = new Stack<Node>();
-    Node curr = root;
+		Stack<TreeNode> s = new Stack<TreeNode>();
+    TreeNode curr = root;
 
 		// Travering the tree
 		while(curr != null || s.size() > 0){
@@ -175,7 +181,7 @@ public class BinarySearchTree extends TreeType
 			curr = curr.right;
 		}
 
-		return inString; 
+		return inString;
 	}
 
 	// Preorder Traversal of the tree
@@ -183,37 +189,67 @@ public class BinarySearchTree extends TreeType
 		// String to be returned
 		String preString = "";
 
-		// Empty Tree
-		if(root == null)
-			return;
+		if(root = null)
+			return preString;
 
-		// print the current root value
-		System.out.println(node.value + " ");
+		Stack<TreeNode> s = new Stack<TreeNode>();
+		s.push(root);
 
-		// check the left child
-		preOrder(root.left);
+		// Run while stack is not empty
+		while(!s.empty()){
 
-		// Check the right child
-		preOrder(root.right);
-	}
+			// Printing the top item
+			TreeNode curr = s.pop();
+			preString += (String)(int)curr.value;
+
+			// Push right and left children of the popped node to stack ( right first because fifo)
+      if (curr.right != null)
+          s.push(curr.right);
+      if (curr.left != null)
+          s.push(curr.left);
+		}
+		return preString; 
+}
 
 	// Postorder Traversal of the tree
 	public String postOrder(TreeNode root) {
+
 		// String to be returned
 		String postString = "";
 
-		// Empty Tree
-		if(root == null)
-			return;
+		// Creating s1 and s2 which were declared in line 46
+		s1 = new Stack<>();
+		s2 = new Stack<>();
 
-		// check the left child
-		postOrder(root.left);
+		if (root == null)
+			return postString;
 
-		// Check the right child
-		postOrder(root.right);
+		// Push root to the firt stack
+		s1.push(root);
 
-		// print the current root value
-		System.out.println(node.value + " ");
+		// Run while the first stack is filled
+		while(!s1.isEmpty()){
+
+			// Pop an item from s1 and push it to s2
+		TreeNode temp = s1.pop();
+		s2.push(temp);
+
+		// Push left and right children of removed item to s1
+		if(temp.left != null)
+		 	s1.push(temp.left);
+		if(temp.right != null)
+			s1.push(temp.right);
+
+		}
+
+		// Print all elements of the second stack
+		while(!s2.isEmpty()){
+			TreeNode curr = s2.pop();
+			postString += (String)curr.value;
+		}
+
+		return postString;
+
 	}
 
 // Overriding all the abstract functions
