@@ -4,6 +4,7 @@ abstract class TreeNode{
 
 	protected int value = 0;
 	protected Color color = Color.WHITE;
+	public static final Color defaultColor = Color.WHITE;
 
 	protected TreeNode 	left = null,
 						right = null;

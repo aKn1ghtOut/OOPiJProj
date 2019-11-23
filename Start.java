@@ -35,7 +35,7 @@ class Start extends JFrame implements Runnable {
 					addButton = new JButton("Add"),
 					deleteButton = new JButton("Delete");
 
-	JRadioButton	AVLTree = new JRadioButton("AVT Tree"),
+	JRadioButton	AVLTree = new JRadioButton("AVL Tree"),
 					BSTree = new JRadioButton("BST Tree"),
 					RBTree = new JRadioButton("Red Black Tree");
 
@@ -293,7 +293,7 @@ class Start extends JFrame implements Runnable {
 
 		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 		infoPanel.setBackground(BGColor);
-		infoPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+		infoPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
 		infoPanel.setAlignmentY(JPanel.CENTER_ALIGNMENT);
 		infoPanel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
 

@@ -25,25 +25,22 @@ class BinaryNode extends TreeNode
 	{
 
 		if(value == val)
-		{
-      // System.out.println(val);
-			color = cr;
-		}
+			this.color = cr;
+		else
+			this.color = defaultColor;
 
 		if(left != null)
-		((ExampleNode)left).searchNodes(val, cr);
+		((BinaryNode)left).searchNodes(val, cr);
 
 
 		if(right != null)
-		((ExampleNode)right).searchNodes(val, cr);
+		((BinaryNode)right).searchNodes(val, cr);
 	}
 
 }
 
 public class BinarySearchTree extends TreeType
 {
-	// Declaring static variables
-	static Stack<TreeNode> s1, s2;
 
 	@Override
 	public TreeNode getRoot() {
@@ -76,7 +73,7 @@ public class BinarySearchTree extends TreeType
 		{
       // Creating a new node
       TreeNode curr = rootNode;
-			ExampleNode en = new ExampleNode(value);
+			BinaryNode en = new BinaryNode(value);
 
 			int inserted = 0;
 
@@ -139,7 +136,7 @@ public class BinarySearchTree extends TreeType
 	public static int inOrderSuccessor(TreeNode root){
 		// Added the changes - check if working
 		if(root.left == null && root.right == null)
-			return null;
+			return -1;
 		int min = (int)root.value;
 		while(root.left != null){
 			min = (int)root.left.value;
