@@ -3,7 +3,7 @@ import java.awt.*;
 abstract class TreeNode{
 
 	protected int value = 0;
-	protected Color color = Color.blue;
+	protected Color color = Color.WHITE;
 
 	protected TreeNode 	left = null,
 						right = null;
@@ -58,9 +58,9 @@ abstract class TreeType
 
 	public abstract void 	deleteElement(int value);
 
-	public abstract void	inOrder();
+	public abstract String	inOrder();
 
-	public abstract void	preOrder();
+	public abstract String	preOrder();
 
-	public abstract void	postOrder();
+	public abstract String	postOrder();
 }

@@ -147,54 +147,43 @@ public class BinarySearchTree extends TreeType
 	// Inorder Traversal of the tree
 	public String inOrder(TreeNode root) {
 		// String to be returned
-		String inString  = "";
+		String postString = "";
 
 		// Empty Tree
 		if(root == null)
-			return;
-		// Creaing a stack
-		Stack<Node> s = new Stack<Node>();
-    Node curr = root;
+			return "";
 
-		// Travering the tree
-		while(curr != null || s.size() > 0){
+		// check the left child
+		postString += inOrder(root.left);
 
-			// Reaching the left most node and pusing values onto the stack
-			while(curr != null){
-				s.push(curr);
-				curr = curr.left;
-			}
+		postString += root.value + " ";
 
-			// Since curr is null right now, we assign the leftmost node to it and move upwards
-			curr = s.pop();
+		// Check the right child
+		postString += inOrder(root.right);
 
-			// Concatinating to the string
-			inString += (String)curr.value;
-
-			// After visiting the left nodes and the parents, we now visit the right nodes
-			curr = curr.right;
-		}
-
-		return inString; 
+		// print the current root value
+		return postString;
 	}
 
 	// Preorder Traversal of the tree
 	public String preOrder(TreeNode root) {
 		// String to be returned
-		String preString = "";
+		String postString = "";
 
 		// Empty Tree
 		if(root == null)
-			return;
+			return "";
 
-		// print the current root value
-		System.out.println(node.value + " ");
+		postString += root.value + " ";
 
 		// check the left child
-		preOrder(root.left);
+		postString += preOrder(root.left);
 
 		// Check the right child
-		preOrder(root.right);
+		postString += preOrder(root.right);
+
+		// print the current root value
+		return postString;
 	}
 
 	// Postorder Traversal of the tree
@@ -204,16 +193,18 @@ public class BinarySearchTree extends TreeType
 
 		// Empty Tree
 		if(root == null)
-			return;
+			return "";
 
 		// check the left child
-		postOrder(root.left);
+		postString += postOrder(root.left);
 
 		// Check the right child
-		postOrder(root.right);
+		postString += postOrder(root.right);
+
+		postString += root.value + " ";
 
 		// print the current root value
-		System.out.println(node.value + " ");
+		return postString;
 	}
 
 // Overriding all the abstract functions
@@ -223,19 +214,21 @@ public class BinarySearchTree extends TreeType
 	}
 
 	@Override
-	public void	inOrder() {
-		inOrder(rootNode);
+	public String inOrder() {
+		// TODO Auto-generated method stub
+		return inOrder(rootNode);
 	}
 
 	@Override
-	public void	preOrder() {
-		preOrder(rootNode);
+	public String preOrder() {
+		// TODO Auto-generated method stub
+		return preOrder(rootNode);
 	}
 
 	@Override
-	public void postOrder() {
-		postOrder(rootNode);
+	public String postOrder() {
+		// TODO Auto-generated method stub
+		return postOrder(rootNode);
 	}
-
 
 }
