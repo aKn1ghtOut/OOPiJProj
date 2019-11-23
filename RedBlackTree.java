@@ -91,6 +91,30 @@ public class RedBlackTree extends TreeType
        }
    }
 
+   // Rotation functions
+   private RedBlackNode rotate(int val, RedBlackNode parent){
+     if(val < parent.element)
+          return parent.left = val < parent.left.element ? rotateWithLeftChild(parent.left) : rotateWithRightChild(parent.left) ;
+    else
+          return parent.right = val < parent.right.element ? rotateWithLeftChild(parent.right) : rotateWithRightChild(parent.right);
+   }
+
+  // Rotation with the left child
+  private RedBlackNode rotateWithLeftChild(RedBlackNode k2){
+    RedBlackNode k1 = k2.left;
+    k2.left = k1.right;
+    k1.right = k2;
+    return k1;
+  }
+
+  // Rotation with the right child
+  private RedBlackNode rotateWithRightChild(RedBlackNode k1){
+    RedBlackNode k2 = k1.right;
+    k1.right = k2.left;
+    k2.left = k1;
+    return k2;
+  }
+
   // function to check if the tree is empty
   public boolean isEmpty(){
     return header.right == nullNode;
@@ -149,6 +173,8 @@ public class RedBlackTree extends TreeType
     // Make root color black
     header.right.color = BLACK;
   }
+
+
 
 	public TreeNode deleteElement(TreeNode root, int val) {
 
