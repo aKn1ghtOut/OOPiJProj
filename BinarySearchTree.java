@@ -42,6 +42,8 @@ class BinaryNode extends TreeNode
 
 public class BinarySearchTree extends TreeType
 {
+	// Declaring static variables
+	static Stack<TreeNode> s1, s2;
 
 	@Override
 	public TreeNode getRoot() {
@@ -73,7 +75,7 @@ public class BinarySearchTree extends TreeType
 		else
 		{
       // Creating a new node
-      		TreeNode curr = rootNode;
+      TreeNode curr = rootNode;
 			ExampleNode en = new ExampleNode(value);
 
 			int inserted = 0;
@@ -127,7 +129,7 @@ public class BinarySearchTree extends TreeType
 
 						// Moving the data from the inorder Successor to the current position
 						root.value = inOrderSuccessor(root.right);
-            root.right = deleteElement(root.right, (int) root.value);
+            root.right = deleteElement(root.right, (int)root.value);
 			}
 
 			// Returning the current root
@@ -135,6 +137,9 @@ public class BinarySearchTree extends TreeType
 	}
 
 	public static int inOrderSuccessor(TreeNode root){
+		// Added the changes - check if working
+		if(root.left == null && root.right == null)
+			return null;
 		int min = (int)root.value;
 		while(root.left != null){
 			min = (int)root.left.value;
@@ -188,6 +193,7 @@ public class BinarySearchTree extends TreeType
 
 	// Postorder Traversal of the tree
 	public String postOrder(TreeNode root) {
+
 		// String to be returned
 		String postString = "";
 
