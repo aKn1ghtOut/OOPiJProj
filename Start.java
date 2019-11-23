@@ -46,14 +46,14 @@ class Start extends JFrame implements Runnable {
 	JTextArea		inOrderText = new JTextArea(2, 20),
 					preOrderText = new JTextArea(2, 20),
 					postOrderText = new JTextArea(2, 20);
-	
+
 	JLabel			inOrderLabel = new JLabel("InOrder:"),
 					preOrderLabel = new JLabel("PreOrder:"),
 					postOrderLabel = new JLabel("PostOrder:");
 
-					
+
 	Color BGColor = Color.BLACK;//new Color(33, 33, 33, 0);
-					
+
 
 	@Override
 	public void run(){
@@ -94,7 +94,7 @@ class Start extends JFrame implements Runnable {
 		bufferGraphics.setFont(new Font("serif", Font.BOLD, 15));
 		bufferGraphics.setColor(Color.GRAY);
 		bufferGraphics.fillRect(0, 0, bufferImage.getWidth(), bufferImage.getHeight());
-		
+
 		processTree();
 
 		// bufferGraphics.setColor(Color.BLUE);
@@ -167,7 +167,7 @@ class Start extends JFrame implements Runnable {
 		leftControlPanel.setLayout(new BoxLayout(leftControlPanel, BoxLayout.Y_AXIS));
 		leftControlPanel.setBackground(Color.GRAY);
 		leftControlPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-		
+
 		radioGroup.add(BSTree);
 		radioGroup.add(AVLTree);
 		radioGroup.add(RBTree);
@@ -227,7 +227,7 @@ class Start extends JFrame implements Runnable {
 			BorderFactory.createEmptyBorder(6, 10, 6, 10)
 		));
 
-		
+
 		searchButton.setBackground(BGColor);
 		searchButton.setForeground(Color.GRAY);
 		searchButton.setBorder(BorderFactory.createCompoundBorder(
@@ -235,7 +235,7 @@ class Start extends JFrame implements Runnable {
 			BorderFactory.createEmptyBorder(6, 10, 6, 10)
 		));
 
-		
+
 		deleteButton.setBackground(BGColor);
 		deleteButton.setForeground(Color.GRAY);
 		deleteButton.setBorder(BorderFactory.createCompoundBorder(
@@ -251,7 +251,7 @@ class Start extends JFrame implements Runnable {
 			public void actionPerformed(ActionEvent e) {
 				int val = Integer.parseInt(nodeField.getText());
 				tr.insertElement(val);
-				
+
 				inOrderText.setText(tr.inOrder());
 				preOrderText.setText(tr.preOrder());
 				postOrderText.setText(tr.postOrder());
@@ -360,5 +360,5 @@ class Start extends JFrame implements Runnable {
 	{
 		new Start();
 	}
-	
+
 }
