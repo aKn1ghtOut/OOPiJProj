@@ -128,9 +128,12 @@ class Start extends JFrame implements Runnable {
 		int c_x = x, c_y = y;
 
 		if(tn.curr_x == -1 || tn.curr_y == -1){
-			tn.stop(x, y);
+			tn.curr_x = x;
+			tn.curr_y = y - 10;
+			c_y = tn.curr_y;
 		}
-		else if(tn.isMoving())
+		
+		if(tn.isMoving())
 		{
 			long timeSince = tn.getSince();
 			long timeNow = System.currentTimeMillis();
@@ -187,6 +190,7 @@ class Start extends JFrame implements Runnable {
 	Start()
 	{
 		setBackground(BGColor);
+		tr = BSTTree;
 
 		cPane.setLayout(new BorderLayout());
 		cPane.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
@@ -247,6 +251,29 @@ class Start extends JFrame implements Runnable {
 			BorderFactory.createEmptyBorder(6, 10, 6, 10)
 		));
 		nodeField.setForeground(BGColor);
+		nodeField.addKeyListener(new KeyListener(){
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)
+				{
+					addButton.doClick();
+					nodeField.setText("");
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+		});
 
 		rightControlPanel.add(nodeField);
 
