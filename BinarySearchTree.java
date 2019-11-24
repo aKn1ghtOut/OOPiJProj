@@ -124,7 +124,7 @@ public class BinarySearchTree extends TreeType
 			else{
             if (root.left == null)
                 return root.right;
-      			else if (root.right == null)
+      		else if (root.right == null)
                 return root.left;
 
 			// Moving the data from the inorder Successor to the current position
@@ -141,16 +141,24 @@ public class BinarySearchTree extends TreeType
 	}
 
 	// Inorder Successor
-	public static TreeNode inOrderSuccessor(TreeNode root){
-		TreeNode curr = root;
-		//int min = (int)root.value;
-		while(curr.left != null){
-			//min = (int)curr.left.value;
-			root = curr.left;
-		}
-		return curr;
-	}
+	// public static TreeNode inOrderSuccessor(TreeNode root){
+	// 	TreeNode curr = root;
+	// 	//int min = (int)root.value;
+	// 	while(curr.left != null){
+	// 		//min = (int)curr.left.value;
+	// 		root = curr.left;
+	// 	}
+	// 	return curr;
+	// }
 
+	// New method of inorder traversal 
+	public static TreeNode inOrderSuccessor(TreeNode root){
+		if(root.left == null)
+			return root; 
+		else
+			return inOrderSuccessor(root.left); 
+	}
+	
 	// Inorder Traversal of the tree
 	public String inOrder(TreeNode root) {
 		// String to be returned
