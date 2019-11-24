@@ -103,19 +103,22 @@ public class BinarySearchTree extends TreeType
 		}
 	}
 
-	public TreeNode deleteElement(TreeNode root, int val) {
+	// BinarySearchTree Deletion
+	void deleteElement(TreeNode root, int val){
+		root = deleteRec(root, val);
+	}
+	public TreeNode deleteRec(TreeNode root, int val) {
 			// If the term is the node to be deleted
 			if (root == null)
 				return root;
 
 			// If the the value is less than the root then move to the left side
-			if(val < (int) root.value){
-				root.left = deleteElement(root.left, val);
-			}
+			if(val < (int) root.value)
+				root.left = deleteRec(root.left, val);
+
 			// If the the value is greater than the root then move to the right side
-			else if (val > (int) root.value){
-				root.right = deleteElement(root.right, val);
-			}
+			else if (val > (int) root.value)
+				root.right = deleteRec(root.right, val);
 
 			// if we have arrived at the leaf
 			else{
@@ -126,7 +129,7 @@ public class BinarySearchTree extends TreeType
 
 						// Moving the data from the inorder Successor to the current position
 						root.value = inOrderSuccessor(root.right);
-            root.right = deleteElement(root.right, (int)root.value);
+            root.right = deleteRec(root.right, (int)root.value);
 			}
 
 			// Returning the current root
@@ -135,14 +138,13 @@ public class BinarySearchTree extends TreeType
 
 	public static int inOrderSuccessor(TreeNode root){
 		// Added the changes - check if working
-		if(root.left == null && root.right == null)
-			return -1;
+		// if(root.left == null && root.right == null)
+		// 	return -1;
 		int min = (int)root.value;
 		while(root.left != null){
 			min = (int)root.left.value;
 			root = root.left;
 		}
-
 		return min;
 	}
 
