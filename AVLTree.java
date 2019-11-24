@@ -1,7 +1,7 @@
 import java.util.*;
 import java.awt.*;
 
-/* This is a class to implement binary search tree */
+/* This is a class to implement AVL tree */
 
 class AVLNode extends TreeNode
 {
@@ -16,7 +16,7 @@ class AVLNode extends TreeNode
 		this.right = newRight;
 	}
 
-	BinaryNode(int val)
+	AVLNode(int val)
 	{
 		value = val;
 	}
@@ -31,11 +31,11 @@ class AVLNode extends TreeNode
 		}
 
 		if(left != null)
-		((ExampleNode)left).searchNodes(val, cr);
+		((AVLNode)left).searchNodes(val, cr);
 
 
 		if(right != null)
-		((ExampleNode)right).searchNodes(val, cr);
+		((AVLNode)right).searchNodes(val, cr);
 	}
 
 }
@@ -57,7 +57,7 @@ public class AVLTree extends TreeType
 
 	@Override
 	public void search(int value) {
-		((BinaryNode)rootNode).searchNodes(value, Color.RED);
+		((AVLNode)rootNode).searchNodes(value, Color.RED);
 	}
 
 	// Insertion function
