@@ -112,6 +112,7 @@ public class BinarySearchTree extends TreeType
 			if (root == null)
 				return root;
 
+
 			// If the the value is less than the root then move to the left side
 			if(val < (int) root.value)
 				root.left = deleteRec(root.left, val);
@@ -128,24 +129,27 @@ public class BinarySearchTree extends TreeType
                 return root.left;
 
 						// Moving the data from the inorder Successor to the current position
-						root.value = inOrderSuccessor(root.right);
+						TreeNode n = inOrderSuccessor(root.right);
+						root.value = (int)n.value;
+						root.curr_x = (int)n.curr_y;
+						root.curr_y = (int)n.curr_y;
             root.right = deleteRec(root.right, (int)root.value);
+
 			}
 
 			// Returning the current root
 			return root;
 	}
 
-	public static int inOrderSuccessor(TreeNode root){
-		// Added the changes - check if working
-		// if(root.left == null && root.right == null)
-		// 	return -1;
+	// Inorder Successor
+	public static TreeNode inOrderSuccessor(TreeNode root){
+		TreeNode curr = root;
 		int min = (int)root.value;
-		while(root.left != null){
-			min = (int)root.left.value;
-			root = root.left;
+		while(curr.left != null){
+			min = (int)curr.left.value;
+			root = curr.left;
 		}
-		return min;
+		return curr;
 	}
 
 	// Inorder Traversal of the tree
