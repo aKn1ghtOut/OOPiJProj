@@ -1,4 +1,3 @@
-import java.util.*;
 import java.awt.*;
 
 /* This is a class to implement binary search tree */
@@ -128,11 +127,11 @@ public class BinarySearchTree extends TreeType
       			else if (root.right == null)
                 return root.left;
 
-						// Moving the data from the inorder Successor to the current position
-						TreeNode n = inOrderSuccessor(root.right);
-						root.value = (int)n.value;
-						root.curr_x = (int)n.curr_y;
-						root.curr_y = (int)n.curr_y;
+			// Moving the data from the inorder Successor to the current position
+			TreeNode n = inOrderSuccessor(root.right);
+			root.value = (int)n.value;
+			root.curr_x = (int)n.curr_x;
+			root.curr_y = (int)n.curr_y;
             root.right = deleteRec(root.right, (int)root.value);
 
 			}
@@ -144,9 +143,9 @@ public class BinarySearchTree extends TreeType
 	// Inorder Successor
 	public static TreeNode inOrderSuccessor(TreeNode root){
 		TreeNode curr = root;
-		int min = (int)root.value;
+		//int min = (int)root.value;
 		while(curr.left != null){
-			min = (int)curr.left.value;
+			//min = (int)curr.left.value;
 			root = curr.left;
 		}
 		return curr;
