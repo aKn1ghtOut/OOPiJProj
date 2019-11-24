@@ -6,11 +6,14 @@ abstract class TreeNode{
 	protected Color color = Color.WHITE;
 	public static final Color defaultColor = Color.WHITE;
 
+
 	protected TreeNode 	left = null,
 						right = null;
 
 	public int 	curr_x=-1,
 				curr_y=-1; //Only to be used by Start.java. Don't play with these
+	protected long	timeMillis = 0; //Animations
+	protected boolean moving = false;
 
 	public long move_s = -1;
 
@@ -37,6 +40,30 @@ abstract class TreeNode{
 	public void setColor(Color c)
 	{
 		color = c;
+	}
+
+	public void setInMotion()
+	{
+		timeMillis = System.currentTimeMillis();
+		moving = true;
+	}
+
+	public long getSince()
+	{
+		return timeMillis;
+	}
+
+	public boolean isMoving()
+	{
+		return moving;
+	}
+
+	public void stop(int x1, int y1)
+	{
+		curr_x = x1;
+		curr_y = y1;
+
+		moving = false;
 	}
 
 	protected abstract void setLeftNode(TreeNode newLeft);

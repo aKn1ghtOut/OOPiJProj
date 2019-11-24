@@ -11,6 +11,8 @@ class Start extends JFrame implements Runnable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public static final int anim_duration = 1500;
+
 	BufferedImage	bufferImage = (BufferedImage)createImage(1000, 1000);
 
 	Graphics 		drawGraphics,
@@ -122,6 +124,34 @@ class Start extends JFrame implements Runnable {
 
 	public void processNode(TreeNode tn, int x, int y, int d_x)
 	{
+
+		int c_x = x, c_y = y;
+
+		if(tn.curr_x == -1 || tn.curr_y == -1){
+			tn.stop(x, y);
+		}
+		else if(tn.isMoving())
+		{
+			long timeSince = tn.getSince();
+			long timeNow = System.currentTimeMillis();
+
+			if(timeNow >= timeSince + anim_duration)
+			{
+				tn.stop(x, y);
+			}
+			else
+			{
+				double progress = ((double)(timeNow - timeSince))/anim_duration;
+				double move = Math.sin(progress * (Math.PI / 2));
+				c_x = (int)(tn.curr_x - (tn.curr_x - x) * move);
+				c_y = (int)(tn.curr_y - (tn.curr_y - y) * move);
+			}
+		}
+		else if(tn.curr_x != x || tn.curr_y != y)
+		{
+			tn.setInMotion();
+		}
+
 		TreeNode 	left = tn.leftNode(),
 					right = tn.rightNode();
 
@@ -133,13 +163,13 @@ class Start extends JFrame implements Runnable {
 		bGraphics2d.setStroke(new BasicStroke(3));
 
 		bGraphics2d.setColor(BGColor);
-		bGraphics2d.fillOval(x - 27, y - 27, 54, 54);
+		bGraphics2d.fillOval(c_x - 27, c_y - 27, 54, 54);
 
 		bGraphics2d.setColor(col);
-		bGraphics2d.fillOval(x - 25, y - 25, 50, 50);
+		bGraphics2d.fillOval(c_x - 25, c_y - 25, 50, 50);
 
 		bGraphics2d.setColor(BGColor);
-		bGraphics2d.drawString(tn.value + "", x - 5, y - 5);
+		bGraphics2d.drawString(tn.value + "", c_x - 5, c_y - 5);
 
 		if(left != null)
 		{
