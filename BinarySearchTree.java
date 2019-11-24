@@ -158,52 +158,51 @@ public class BinarySearchTree extends TreeType
 		else
 			return inOrderSuccessor(root.left); 
 	}
-	
+
 	// Inorder Traversal of the tree
 	public String inOrder(TreeNode root) {
 		// String to be returned
-		String postString = "";
+		String inString = "";
 
 		// Empty Tree
 		if(root == null)
 			return "";
 
 		// check the left child
-		postString += inOrder(root.left);
+		inString += inOrder(root.left);
 
-		postString += root.value + " ";
+		inString += root.value + " ";
 
 		// Check the right child
-		postString += inOrder(root.right);
+		inString += inOrder(root.right);
 
 		// print the current root value
-		return postString;
+		return inString;
 	}
 
 	// Preorder Traversal of the tree
 	public String preOrder(TreeNode root) {
 		// String to be returned
-		String postString = "";
+		String preString = "";
 
 		// Empty Tree
 		if(root == null)
 			return "";
 
-		postString += root.value + " ";
+		preString += root.value + " ";
 
 		// check the left child
-		postString += preOrder(root.left);
+		preString += preOrder(root.left);
 
 		// Check the right child
-		postString += preOrder(root.right);
+		preString += preOrder(root.right);
 
 		// print the current root value
-		return postString;
+		return preString;
 	}
 
 	// Postorder Traversal of the tree
 	public String postOrder(TreeNode root) {
-
 		// String to be returned
 		String postString = "";
 

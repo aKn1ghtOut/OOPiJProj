@@ -1,4 +1,7 @@
 import java.util.*;
+
+import javax.lang.model.util.ElementScanner6;
+
 import java.awt.*;
 
 /* This is a class to implement AVL tree */
@@ -74,165 +77,164 @@ public class AVLTree extends TreeType
 
   // function to calculate the height of the tree
   int height(TreeNode root){
-    if (root == null)
-
+	if (root == null)
+		return 0; 
+	return ((AVLNode)root).height; 
   }
 
   // Utitlity function to right rotate subtree
-  TreeNode rightRotate(TreeNode y)
-  {
+  TreeNode rightRotate(TreeNode y){
+	AVLNode x = (AVLNode)y.left; 
+	TreeNode T2 = x.right; 
 
-  }
+	// Perform rotation 
+	x.right = y; 
+	y.left = T2; 
 
-
-	public void insertElement(int value) {
-
+	// Update heights 
+	x.height = max(height(x.left), height(x.right)) + 1; 
+	((AVLNode)y).height = max(height(y.left), height(y.right)) + 1;
+	
+	// Returning the root
+	return x; 
 	}
 
-	public TreeNode deleteElement(TreeNode root, int val) {
-			// If the term is the node to be deleted
-			if (root == null)
-				return root;
+// Utility function to right rotate subtree 
+TreeNode leftRotate(TreeNode x) { 
+	AVLNode y = (AVLNode)x.right; 
+	TreeNode T2 = y.left; 
 
-			// If the the value is less than the root then move to the left side
-			if(val < (int) root.value){
-				root.left = deleteElement(root.left, val);
-			}
-			// If the the value is greater than the root then move to the right side
-			else if (val > (int) root.value){
-				root.right = deleteElement(root.right, val);
-			}
+	// Perform rotation 
+	y.left = x; 
+	x.right = T2; 
 
-			// if we have arrived at the leaf
-			else{
-            if (root.left == null)
-                return root.right;
-      			else if (root.right == null)
-                return root.left;
+	//  Update heights 
+	((AVLNode)x).height = max(height(x.left), height(x.right)) + 1; 
+	y.height = max(height(y.left), height(y.right)) + 1; 
 
-						// Moving the data from the inorder Successor to the current position
-						root.value = inOrderSuccessor(root.right);
-            root.right = deleteElement(root.right, (int)root.value);
-			}
+	// Return new root 
+	return y; 
+} 
 
-			// Returning the current root
-			return root;
+	// Function to find the balance factor of the tree
+	int getBalance(TreeNode N) { 
+		if (N == null) 
+			return 0; 
+	
+		return height(N.left) - height(N.right); 
+	}  
+
+	// Insertion function 
+	void insertElement(TreeNode root, int val){
+		root = insert(root, val); 
 	}
+	public TreeNode insert(TreeNode root, int val) {
+		/* 1. Perform BST Insertion */ 
+		// If the tree is empty
+		if(root == null)
+			root = new AVLNode(val);
+		
+		if(val < root.value)
+			root.left = insert(root.left, val); 
+		else if(val > root.value)
+			root.left = insert(root.left, val);
+		// If same, then nothing
+		else 
+			return root; 
+		/* 2. Update the height of the ancestor */ 
+		int h = ((AVLNode)root).height; 
+		h = 1 + max(height(root.left), height(root.right)); 
+			
+		/* If the node became unbalanced */
+		int balance = getBalance(root); 
 
-	public static int inOrderSuccessor(TreeNode root){
-		// Added the changes - check if working
-		if(root.left == null && root.right == null)
-			return null;
-		int min = (int)root.value;
-		while(root.left != null){
-			min = (int)root.left.value;
-			root = root.left;
+		// Left Left Case
+		if(balance > 1 && val < root.left.value)
+			return leftRotate(root); 
+		
+		// Right Right Case 
+		if(balance < -1 && val > root.right.value)
+			return rightRotate(root); 
+		
+		// Left Right Case 
+		if(balance > 1 && val > root.left.value){
+			root.left = leftRotate(root.left); 
+			return rightRotate(root); 
+		}
+		// Right Left Case
+		if(balance < -1 && val > root.right.value){
+			root.right = rightRotate(root.left); 
+			return leftRotate(root); 		
 		}
 
-		return min;
+		return root;
 	}
+
+	public void deleteElement(TreeNode root, int val) {
+			
+	}
+
 
 	// Inorder Traversal of the tree
 	public String inOrder(TreeNode root) {
 		// String to be returned
-		String inString  = "";
+		String inString = "";
 
 		// Empty Tree
 		if(root == null)
-			return inString;
+			return "";
 
-		// Creaing a stack
-		Stack<TreeNode> s = new Stack<TreeNode>();
-    TreeNode curr = root;
+		// check the left child
+		inString += inOrder(root.left);
 
-		// Travering the tree
-		while(curr != null || s.size() > 0){
+		inString += root.value + " ";
 
-			// Reaching the left most node and pusing values onto the stack
-			while(curr != null){
-				s.push(curr);
-				curr = curr.left;
-			}
+		// Check the right child
+		inString += inOrder(root.right);
 
-			// Since curr is null right now, we assign the leftmost node to it and move upwards
-			curr = s.pop();
-
-			// Concatinating to the string
-			inString += (String)curr.value;
-
-			// After visiting the left nodes and the parents, we now visit the right nodes
-			curr = curr.right;
-		}
-
-		return inString;
-	}
-
-	// Preorder Traversal of the tree
+		// print the current root value
+		return inString; 
+}
+	// PreOrder Traversal of the tree
 	public String preOrder(TreeNode root) {
 		// String to be returned
 		String preString = "";
 
-		if(root = null)
-			return preString;
+		// Empty Tree
+		if(root == null)
+			return "";
 
-		Stack<TreeNode> s = new Stack<TreeNode>();
-		s.push(root);
+		preString += root.value + " ";
 
-		// Run while stack is not empty
-		while(!s.empty()){
+		// check the left child
+		preString += preOrder(root.left);
 
-			// Printing the top item
-			TreeNode curr = s.pop();
-			preString += (String)(int)curr.value;
+		// Check the right child
+		preString += preOrder(root.right);
 
-			// Push right and left children of the popped node to stack ( right first because fifo)
-      if (curr.right != null)
-          s.push(curr.right);
-      if (curr.left != null)
-          s.push(curr.left);
-		}
-		return preString;
-}
+		// print the current root value
+		return preString;	
+	}
 
 	// Postorder Traversal of the tree
 	public String postOrder(TreeNode root) {
-
 		// String to be returned
 		String postString = "";
 
-		// Creating s1 and s2 which were declared in line 46
-		s1 = new Stack<>();
-		s2 = new Stack<>();
+		// Empty Tree
+		if(root == null)
+			return "";
 
-		if (root == null)
-			return postString;
+		// check the left child
+		postString += postOrder(root.left);
 
-		// Push root to the firt stack
-		s1.push(root);
+		// Check the right child
+		postString += postOrder(root.right);
 
-		// Run while the first stack is filled
-		while(!s1.isEmpty()){
+		postString += root.value + " ";
 
-			// Pop an item from s1 and push it to s2
-		TreeNode temp = s1.pop();
-		s2.push(temp);
-
-		// Push left and right children of removed item to s1
-		if(temp.left != null)
-		 	s1.push(temp.left);
-		if(temp.right != null)
-			s1.push(temp.right);
-
-		}
-
-		// Print all elements of the second stack
-		while(!s2.isEmpty()){
-			TreeNode curr = s2.pop();
-			postString += (String)curr.value;
-		}
-
-		return postString;
-
+		// print the current root value
+		return postString;		
 	}
 
 // Overriding all the abstract functions
@@ -242,18 +244,23 @@ public class AVLTree extends TreeType
 	}
 
 	@Override
-	public void	inOrder() {
-		inOrder(rootNode);
+	public void insertElement(int value) {
+		insertElement(rootNode, value);
 	}
 
 	@Override
-	public void	preOrder() {
-		preOrder(rootNode);
+	public String inOrder() {
+		return inOrder(rootNode);
 	}
 
 	@Override
-	public void postOrder() {
-		postOrder(rootNode);
+	public String preOrder() {
+		return preOrder(rootNode);
+	}
+
+	@Override
+	public String postOrder() {
+		return postOrder(rootNode);
 	}
 
 

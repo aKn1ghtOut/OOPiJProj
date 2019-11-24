@@ -30,7 +30,7 @@ class Start extends JFrame implements Runnable {
 
 	TreeType		tr 	=	null,
 					BSTTree = new BinarySearchTree(),
-					AVlTree = new BinarySearchTree(), // Make this of type AVL Tree after Class is made
+					AVlTree = new AVLTree(), // Make this of type AVL Tree after Class is made
 					RBlTree = new BinarySearchTree(); // Make this of type RBL Tree after corresponding class is made
 
 	JButton		 	searchButton = new JButton("Search"),
