@@ -9,7 +9,7 @@ class AVLNode extends TreeNode
   protected int key;  
 
 	@Override
-	protected void setLeftNode(final TreeNode newLeft) {
+	protected void setLeftNode(TreeNode newLeft) {
 		this.left = newLeft;
 	}
 

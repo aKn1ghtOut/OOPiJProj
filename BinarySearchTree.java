@@ -103,35 +103,45 @@ public class BinarySearchTree extends TreeType
 	}
 
 	// BinarySearchTree Deletion
-	void deleteElement(TreeNode root, int val){
-		root = deleteRec(root, val);
+	TreeNode deleteElement(TreeNode root, int val){
+		root = deleteR(root, val);
+		return root;
 	}
-	public TreeNode deleteRec(TreeNode root, int val) {
+	public TreeNode deleteR(TreeNode root, int val) {
 			// If the tree is empty
 			if (root == null)
-				return null;
+				return root;
 
 			// If the the value is less than the root then move to the left side
 			if(val < (int) root.value)
-				root.left = deleteRec(root.left, val);
+				root.left = deleteR(root.left, val);
 
 			// If the the value is greater than the root then move to the right side
 			else if (val > (int) root.value)
-				root.right = deleteRec(root.right, val);
+				root.right = deleteR(root.right, val);
 
 			// if we have arrived at the leaf
 			else{
 				if (root.left == null)
-					return root.right;
+				{
+					root = root.right;
+					return root;
+				}
 				else if (root.right == null)
-					return root.left;
-
-			// Moving the data from the inorder Successor to the current position
-			TreeNode n = inOrderSuccessor(root.right);
-			root.value = (int)n.value;
-			root.curr_x = (int)n.curr_x;
-			root.curr_y = (int)n.curr_y;
-            root.right = deleteRec(root.right, (int)root.value);
+				{
+					root = root.left;
+					return root;
+				}
+				else
+				{
+					// Moving the data from the inorder Successor to the current position
+					TreeNode n = root; 
+					n = inOrderSuccessor(root.right); 
+					root.value = (int)n.value;
+					root.curr_x = (int)n.curr_x;
+					root.curr_y = (int)n.curr_y;
+					root.right = deleteR(root.right, (int)root.value);
+				}
 			}
 
 			// Returning the current root
@@ -213,7 +223,7 @@ public class BinarySearchTree extends TreeType
 // Overriding all the abstract functions
 	@Override
 	public void deleteElement(int value) {
-		deleteElement(rootNode, value);
+		rootNode = deleteElement(rootNode, value);
 	}
 
 	@Override
