@@ -79,9 +79,9 @@ public class RBlackTree extends TreeType {
             current = item < current.value ?
                 (RedBlackNode)current.left : (RedBlackNode)current.right;
              
-            // Check if two red children; fix if so
+            // Check if two red children and change it accordingly 
             if( current.left.color == Color.RED && current.right.color == Color.RED )
-                handleReorient( item );
+                handleReorient(item);
 		}
 		
         current = new RedBlackNode( item, null, null );
