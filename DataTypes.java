@@ -4,7 +4,8 @@ abstract class TreeNode{
 
 	protected int value = 0;
 	protected Color color = Color.WHITE;
-	public static final Color defaultColor = Color.WHITE;
+	public Color defaultColor = Color.WHITE;
+	public Color textColor = Color.black;
 
 
 	protected TreeNode 	left = null,
@@ -64,6 +65,26 @@ abstract class TreeNode{
 		curr_y = y1;
 
 		moving = false;
+	}
+
+	void searchNodes(final int val, final Color cr)
+	{
+
+		if(value == val)
+		{
+      // System.out.println(val);
+			color = cr;
+		}
+		else
+		color = defaultColor;
+		
+
+		if(left != null)
+		((AVLNode)left).searchNodes(val, cr);
+
+
+		if(right != null)
+		((AVLNode)right).searchNodes(val, cr);
 	}
 
 	protected abstract void setLeftNode(TreeNode newLeft);

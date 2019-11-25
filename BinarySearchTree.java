@@ -19,23 +19,6 @@ class BinaryNode extends TreeNode
 	{
 		value = val;
 	}
-
-	void searchNodes(int val, Color cr)
-	{
-
-		if(value == val)
-			this.color = cr;
-		else
-			this.color = defaultColor;
-
-		if(left != null)
-		((BinaryNode)left).searchNodes(val, cr);
-
-
-		if(right != null)
-		((BinaryNode)right).searchNodes(val, cr);
-	}
-
 }
 
 public class BinarySearchTree extends TreeType
