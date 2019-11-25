@@ -320,7 +320,9 @@ AVLNode leftRotate(AVLNode x) {
 		postString += root.value + " ";
 
 		// print the current root value
-		return postString;		
+		//return postString;		
+		// Returning height instead 
+		return Integer.toString(((AVLNode)root).height);
 	}
 
 // Overriding all the abstract functions

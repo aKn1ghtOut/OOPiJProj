@@ -1,10 +1,9 @@
 import java.awt.*;
 
 /* This is a class to implement binary search tree */
-
+ 
 class BinaryNode extends TreeNode
 {
-
 	@Override
 	protected void setLeftNode(TreeNode newLeft) {
 		this.left = newLeft;
@@ -23,7 +22,7 @@ class BinaryNode extends TreeNode
 
 public class BinarySearchTree extends TreeType
 {
-
+	int c = 1; 
 	@Override
 	public TreeNode getRoot() {
 		// TODO Auto-generated method stub
@@ -47,16 +46,16 @@ public class BinarySearchTree extends TreeType
 	}
 
 	public void insertElement(int value) {
-
+	
     // If the tree is empty
 		if(rootNode == null)
 			rootNode = new BinaryNode(value);
 		else
 		{
       // Creating a new node
-      TreeNode curr = rootNode;
+	  TreeNode curr = rootNode;
 			BinaryNode en = new BinaryNode(value);
-
+			// c = ((BinaryNode)rootNode).count; 
 			int inserted = 0;
 
 			while(inserted != 1)
@@ -69,6 +68,7 @@ public class BinarySearchTree extends TreeType
 					{
 						curr.setLeftNode(en);
 						inserted = 1;
+						c++; 
 					}
 				}
 				else
@@ -79,6 +79,7 @@ public class BinarySearchTree extends TreeType
 					{
 						curr.setRightNode(en);
 						inserted = 1;
+						c++; 
 					}
 				}
 			}
@@ -200,7 +201,8 @@ public class BinarySearchTree extends TreeType
 		postString += root.value + " ";
 
 		// print the current root value
-		return postString;
+		//return postString;
+		return Integer.toString(c); 
 	}
 
 // Overriding all the abstract functions
