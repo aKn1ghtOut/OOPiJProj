@@ -4,6 +4,7 @@ import java.awt.*;
  
 class BinaryNode extends TreeNode
 {
+	protected int height = 1;
 	@Override
 	protected void setLeftNode(TreeNode newLeft) {
 		this.left = newLeft;
@@ -44,6 +45,13 @@ public class BinarySearchTree extends TreeType
 	void binaryInsert(int key) {
 		insertElement(key);
 	}
+
+	  // function to calculate the height of the tree
+	  int height(BinaryNode root){
+		if (root == null)
+			return 0; 
+		return root.height; 
+	  }
 
 	public void insertElement(int value) {
 	
@@ -89,6 +97,7 @@ public class BinarySearchTree extends TreeType
 	// BinarySearchTree Deletion
 	TreeNode deleteElement(TreeNode root, int val){
 		root = deleteR(root, val);
+		c--; 
 		return root;
 	}
 	public TreeNode deleteR(TreeNode root, int val) {
